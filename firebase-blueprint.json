@@ -1,0 +1,640 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Registered student profile and portal account metadata.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "fullName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "minLength": 5,
+          "maxLength": 160
+        },
+        "phone": {
+          "type": "string",
+          "maxLength": 30
+        },
+        "district": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "education": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "avatarUrl": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "role": {
+          "type": "string",
+          "enum": ["student"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "fullName", "email", "role", "createdAt", "updatedAt"]
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Authorized administrator registry record.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "username": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 64
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "maxLength": 160
+        },
+        "role": {
+          "type": "string",
+          "enum": ["super_admin", "editor", "reviewer"]
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "username", "email", "role", "active", "createdAt"]
+    },
+    "AdmissionApplication": {
+      "title": "AdmissionApplication",
+      "description": "Student admission application submitted for DYD AI training.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "trackingCode": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 40
+        },
+        "fullName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "phone": {
+          "type": "string",
+          "minLength": 6,
+          "maxLength": 30
+        },
+        "nidOrBirthReg": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 40
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "maxLength": 30
+        },
+        "educationLevel": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "district": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "centerId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "courseId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "shortlisted", "approved", "rejected"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "trackingCode",
+        "fullName",
+        "email",
+        "phone",
+        "district",
+        "courseId",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Course": {
+      "title": "Course",
+      "description": "Training program offered by DYD AI.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "titleBn": {
+          "type": "string",
+          "maxLength": 180
+        },
+        "summary": {
+          "type": "string",
+          "maxLength": 800
+        },
+        "duration": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "level": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "title", "titleBn", "summary", "duration", "active", "updatedAt"]
+    },
+    "CourseModule": {
+      "title": "CourseModule",
+      "description": "Curriculum module within the AI training catalog.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "courseId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 140
+        },
+        "titleBn": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 600
+        },
+        "hours": {
+          "type": "number"
+        },
+        "order": {
+          "type": "number"
+        },
+        "icon": {
+          "type": "string",
+          "maxLength": 40
+        }
+      },
+      "required": ["id", "title", "titleBn", "description", "hours", "order"]
+    },
+    "TrainingCenter": {
+      "title": "TrainingCenter",
+      "description": "Physical training center location.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "district": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "region": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "address": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "capacity": {
+          "type": "number"
+        },
+        "active": {
+          "type": "boolean"
+        }
+      },
+      "required": ["id", "name", "district", "region", "address", "capacity", "active"]
+    },
+    "PackageRegion": {
+      "title": "PackageRegion",
+      "description": "Regional training package details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "packageNumber": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "regionName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "districtCount": {
+          "type": "number"
+        },
+        "partnerOrg": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "duration": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "availableCenters": {
+          "type": "number"
+        },
+        "districts": {
+          "type": "array"
+        }
+      },
+      "required": ["id", "packageNumber", "regionName", "districtCount", "partnerOrg", "duration", "availableCenters"]
+    },
+    "Notice": {
+      "title": "Notice",
+      "description": "Public announcement or notice board item.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "body": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "category": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "publishedDate": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "pinned": {
+          "type": "boolean"
+        },
+        "active": {
+          "type": "boolean"
+        }
+      },
+      "required": ["id", "title", "body", "category", "publishedDate", "active"]
+    },
+    "NotificationItem": {
+      "title": "NotificationItem",
+      "description": "Targeted notification for a student.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 600
+        },
+        "read": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "userId", "title", "message", "read", "createdAt"]
+    },
+    "AdmitCard": {
+      "title": "AdmitCard",
+      "description": "Examination admit card issued to an applicant.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "trackingCode": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "rollNumber": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "studentName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "examDate": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "examVenue": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "issuedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "userId", "trackingCode", "rollNumber", "studentName", "examDate", "examVenue", "issuedAt"]
+    },
+    "ExamResult": {
+      "title": "ExamResult",
+      "description": "Assessment and examination score for a trainee.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "rollNumber": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "studentName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "courseTitle": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "score": {
+          "type": "number"
+        },
+        "grade": {
+          "type": "string",
+          "maxLength": 16
+        },
+        "status": {
+          "type": "string",
+          "enum": ["passed", "merit", "pending", "failed"]
+        },
+        "publishedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "userId", "rollNumber", "studentName", "courseTitle", "score", "grade", "status", "publishedAt"]
+    },
+    "Certificate": {
+      "title": "Certificate",
+      "description": "Verifiable digital certificate issued upon course completion.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "certificateCode": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "studentName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "courseTitle": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "centerName": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "issueDate": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "grade": {
+          "type": "string",
+          "maxLength": 20
+        },
+        "revoked": {
+          "type": "boolean"
+        }
+      },
+      "required": ["id", "certificateCode", "userId", "studentName", "courseTitle", "issueDate", "grade", "revoked"]
+    },
+    "SiteSettings": {
+      "title": "SiteSettings",
+      "description": "CMS website content, feature switches, and branding configuration.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "payload": {
+          "type": "object"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "payload", "updatedAt"]
+    },
+    "ActivityLog": {
+      "title": "ActivityLog",
+      "description": "Audit log of admin and system operations.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "actor": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "action": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "target": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "actor", "action", "target", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Student user profile documents scoped by owner UID."
+    },
+    "/adminUsers/{adminId}": {
+      "schema": { "$ref": "#/entities/AdminUser" },
+      "description": "Authorized admin role registry."
+    },
+    "/applications/{applicationId}": {
+      "schema": { "$ref": "#/entities/AdmissionApplication" },
+      "description": "Student admission applications."
+    },
+    "/courses/{courseId}": {
+      "schema": { "$ref": "#/entities/Course" },
+      "description": "Publicly readable training programs."
+    },
+    "/courseModules/{moduleId}": {
+      "schema": { "$ref": "#/entities/CourseModule" },
+      "description": "Publicly readable training modules."
+    },
+    "/trainingCenters/{centerId}": {
+      "schema": { "$ref": "#/entities/TrainingCenter" },
+      "description": "Publicly readable training centers."
+    },
+    "/packages/{packageId}": {
+      "schema": { "$ref": "#/entities/PackageRegion" },
+      "description": "Publicly readable regional packages."
+    },
+    "/notices/{noticeId}": {
+      "schema": { "$ref": "#/entities/Notice" },
+      "description": "Publicly readable notices."
+    },
+    "/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/NotificationItem" },
+      "description": "Student-scoped notifications."
+    },
+    "/admitCards/{admitCardId}": {
+      "schema": { "$ref": "#/entities/AdmitCard" },
+      "description": "Student-scoped examination admit cards."
+    },
+    "/results/{resultId}": {
+      "schema": { "$ref": "#/entities/ExamResult" },
+      "description": "Student-scoped exam results."
+    },
+    "/certificates/{certificateId}": {
+      "schema": { "$ref": "#/entities/Certificate" },
+      "description": "Verifiable certificates (direct get by certificate ID)."
+    },
+    "/siteSettings/{settingId}": {
+      "schema": { "$ref": "#/entities/SiteSettings" },
+      "description": "Website configuration and CMS content."
+    },
+    "/activityLogs/{logId}": {
+      "schema": { "$ref": "#/entities/ActivityLog" },
+      "description": "Admin activity audit trail."
+    }
+  }
+}

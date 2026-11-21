@@ -1,0 +1,6 @@
+{
+  "name": "DYD AI — Artificial Intelligence Skill Development Platform",
+  "description": "DYD AI training, digital skills development, student portal, certificate verification, and admin management platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

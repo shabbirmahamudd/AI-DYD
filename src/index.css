@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --dyd-forest: #092A20;
+    --dyd-primary: #006A4E;
+    --dyd-emerald: #0E805F;
+    --dyd-mint: #34D399;
+    --dyd-red: #D92B2B;
+    --dyd-bg: #F4F8F6;
+    --dyd-ink: #0F241D;
+    --dyd-muted: #526860;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', 'Hind Siliguri', 'Noto Sans Bengali', 'DM Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    background-color: var(--dyd-bg);
+    color: var(--dyd-ink);
+    overflow-x: hidden;
+  }
+}
+
+.font-display {
+  font-family: 'Plus Jakarta Sans', 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+  transition: letter-spacing 260ms cubic-bezier(0.16, 1, 0.3, 1), color 220ms ease;
+}
+
+.font-bn {
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', 'Plus Jakarta Sans', sans-serif;
+}
+
+.font-mono-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.heading-glide {
+  transition: letter-spacing 280ms cubic-bezier(0.16, 1, 0.3, 1), color 220ms ease, transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .heading-glide,
+.heading-glide:hover {
+  letter-spacing: -0.01em;
+}
+
+.text-gradient-dyd {
+  background: linear-gradient(115deg, #092A20 0%, #006A4E 64%, #15803D 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes dyd-marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-dyd-marquee {
+  display: flex;
+  width: max-content;
+  animation: dyd-marquee 34s linear infinite;
+}
+
+.animate-dyd-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-dyd-marquee {
+    animation: none;
+  }
+  .font-display,
+  .heading-glide {
+    transition: none;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important;
+  }
+}
